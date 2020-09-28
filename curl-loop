@@ -1,0 +1,18 @@
+#!/bin/bash
+
+NumberOfTests=$1
+URL=$2
+SleepDuration=$3
+
+#Check Vars
+if [[ -z $1 ]] ; then NumberOfTests="10" ; fi
+if [[ -z $2 ]] ; then URL="www.google.com" ; fi
+if [[ -z $3 ]] ; then SleepDuration="0.250" ; fi
+
+for ((i=1;i<=$NumberOfTests;i++))
+do
+        echo "$(curl -X GET $URL --silent --output /dev/null -w "%{time_namelookup}")"
+        sleep $SleepDuration
+done
+
+exit 0
