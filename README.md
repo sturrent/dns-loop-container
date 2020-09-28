@@ -24,7 +24,7 @@ spec:
 EOF
 ```
 
-#### Run the script with the default vaules:
+#### Run the script with the default values:
 ```
 kubectl exec -it dns-loop -- dns-loop
 ```
