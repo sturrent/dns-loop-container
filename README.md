@@ -38,13 +38,10 @@ Note: default values in dns-loop are
 ![sample_view](https://user-images.githubusercontent.com/16940760/94466451-ae7f0880-017e-11eb-952b-a07a1e97570d.png)
 
 #### Running with custom values:
-This is a sample run using 200 iterations, URL azure.microsoft.com and running the queries every 100 ms
+This is a sample run using 200 iterations, URL azure.microsoft.com, running the queries every 100 ms, and exiting non-zero if any single request takes longer than 1 second
 
 ```
-kubectl exec -it dns-loop -- dns-loop 200 azure.microsoft.com 0.100
+kubectl exec -it dns-loop -- dns-loop 200 azure.microsoft.com 0.100 1
 ```
 
 ![sample_view](https://user-images.githubusercontent.com/16940760/94466883-5a285880-017f-11eb-9e0c-ccd00b9ec7db.png)
-
-
-
