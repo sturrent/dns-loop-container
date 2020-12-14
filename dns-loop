@@ -3,16 +3,17 @@
 NumberOfTests=$1
 URL=$2
 SleepDuration=$3
+MaxTime=$4
 
 #Check Vars
 if [[ -z $1 ]] ; then NumberOfTests="100" ; fi
 if [[ -z $2 ]] ; then URL="google.com" ; fi
 if [[ -z $3 ]] ; then SleepDuration="0.250" ; fi
 
-
 echo -e "Runnung DNS loop check with $NumberOfTests iterations and URL $URL ...\n"
 while true;do for s in / - \\ \|; do printf "\r$s";sleep 1;done; done &
-curl-loop $NumberOfTests $URL $SleepDuration | hist -r -x -b $NumberOfTests -c blue
+curl-loop $NumberOfTests $URL $SleepDuration $MaxTime | hist -r -x -b $NumberOfTests -c blue
+dns_loop_exit_code=${PIPESTATUS[0]}
 kill $!; trap 'kill $!' SIGTERM
 
-exit 0
+exit $dns_loop_exit_code

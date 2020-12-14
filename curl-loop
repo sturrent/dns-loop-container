@@ -3,16 +3,24 @@
 NumberOfTests=$1
 URL=$2
 SleepDuration=$3
+MaxTime=$4
 
 #Check Vars
 if [[ -z $1 ]] ; then NumberOfTests="10" ; fi
 if [[ -z $2 ]] ; then URL="www.google.com" ; fi
 if [[ -z $3 ]] ; then SleepDuration="0.250" ; fi
 
+curl_loop_exit_code=0
 for ((i=1;i<=$NumberOfTests;i++))
 do
-        echo "$(curl -X GET $URL --silent --output /dev/null -w "%{time_namelookup}")"
+        CurlTime=$(curl -X GET $URL --silent --output /dev/null -w "%{time_namelookup}")
+        echo "$CurlTime"
+        if [[ -n $MaxTime ]]; then
+		if [ $CurlTime \> $MaxTime ]; then
+			curl_loop_exit_code=1
+		fi
+        fi
         sleep $SleepDuration
 done
 
-exit 0
+exit $curl_loop_exit_code
