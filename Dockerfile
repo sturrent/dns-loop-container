@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:latest
 
 COPY dns-loop curl-loop awk-dns-loop /usr/bin/
 
