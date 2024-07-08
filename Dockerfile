@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:bullseye
 
 COPY dns-loop curl-loop awk-dns-loop /usr/bin/
 
